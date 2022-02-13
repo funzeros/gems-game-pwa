@@ -1,6 +1,6 @@
 {
 	"name": "gems-game-pwa",
-	"license": "",
+	"license": "GPL-3.0",
 	"private": true,
 	"version": "0.0.0",
 	"scripts": {
