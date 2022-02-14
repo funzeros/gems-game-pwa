@@ -1,11 +1,11 @@
 import Head from 'components/Head'
 import type { ReactElement } from 'react'
 
-export default function Rank(): ReactElement {
+export default function Team(): ReactElement {
 	return (
 		<>
-			<Head title='GemsGame-排位' />
-			<div>Rank</div>
+			<Head title='GemsGame-队伍' />
+			<div>Team</div>
 		</>
 	)
 }

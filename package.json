@@ -109,8 +109,7 @@
 		"*": "prettier -uw",
 		"*.css": "stylelint --cache --fix",
 		"*.{ts,tsx}": [
-			"eslint --cache --fix",
-			"jest --findRelatedTests --coverage=false"
+			"eslint --cache --fix"
 		]
 	},
 	"nyc": {
