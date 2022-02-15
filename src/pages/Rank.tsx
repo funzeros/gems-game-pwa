@@ -5,7 +5,9 @@ export default function Rank(): ReactElement {
 	return (
 		<>
 			<Head title='GemsGame-排位' />
-			<div>Rank</div>
+			<div>
+				Rank <div />
+			</div>
 		</>
 	)
 }

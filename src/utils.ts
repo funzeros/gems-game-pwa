@@ -1,6 +1,6 @@
+import { isDate } from 'lodash'
 import { useLayoutEffect, useState } from 'react'
 
-// eslint-disable-next-line import/prefer-default-export
 export function useMediaQuery(query: string): boolean {
 	const [matches, setMatches] = useState(() => matchMedia(query).matches)
 
@@ -19,4 +19,21 @@ export function useMediaQuery(query: string): boolean {
 	}, [query])
 
 	return matches
+}
+
+export function useRandom(seedSrouce: number): () => number {
+	const A = 9301
+	const B = 49_297
+	const C = 233_280
+	const D = 233_280
+	let seed = seedSrouce
+	return () => {
+		seed = (seed * A + B) % C
+		return seed / D
+	}
+}
+
+export const toLocaleString = (time: Date | number | string): string => {
+	if (isDate(time)) return time.toLocaleString('zh-CN', { hour12: false })
+	return new Date(time).toLocaleString('zh-CN', { hour12: false })
 }

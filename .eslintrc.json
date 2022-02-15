@@ -50,7 +50,7 @@
 			}
 		],
 		"no-void": "off",
-
+		"@typescript-eslint/explicit-function-return-type": "off",
 		"@typescript-eslint/padding-line-between-statements": "off",
 		"@typescript-eslint/prefer-enum-initializers": "off",
 		"@typescript-eslint/prefer-readonly-parameter-types": "off",
@@ -76,7 +76,7 @@
 		"@typescript-eslint/member-ordering": "off",
 		"@typescript-eslint/prefer-includes": "off",
 		"@typescript-eslint/no-restricted-imports": "off",
-
+		"import/prefer-default-export": "off",
 		"import/no-deprecated": "error",
 		"import/order": "off",
 		"import/no-extraneous-dependencies": [
