@@ -5,7 +5,7 @@ export default function Team(): ReactElement {
 	return (
 		<>
 			<Head title='GemsGame-队伍' />
-			<div>Team</div>
+			<main>Team</main>
 		</>
 	)
 }

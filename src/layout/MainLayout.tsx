@@ -43,7 +43,7 @@ export default function MainLayout(): ReactElement {
 		setPathname(name)
 	}
 	return (
-		<div className='fixed flex h-screen  w-screen flex-col  overflow-hidden bg-gray-100'>
+		<section className='fixed flex h-screen  w-screen flex-col  overflow-hidden bg-gray-100'>
 			<div className='flex-1 overflow-hidden'>
 				<Switch>
 					{MyRoutes}
@@ -62,6 +62,6 @@ export default function MainLayout(): ReactElement {
 					</Tabbar.Item>
 				))}
 			</Tabbar>
-		</div>
+		</section>
 	)
 }

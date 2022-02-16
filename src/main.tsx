@@ -1,10 +1,12 @@
 import App from 'App'
+import { registerUtil } from 'config/myUtil'
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { registerSW } from 'virtual:pwa-register'
 import './index.css'
 
+registerUtil()
 registerSW()
 
 const MAX_RETRIES = 1

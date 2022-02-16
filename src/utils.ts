@@ -21,7 +21,7 @@ export function useMediaQuery(query: string): boolean {
 	return matches
 }
 
-export function useRandom(seedSrouce: number): () => number {
+export function seedRandom(seedSrouce: number): () => number {
 	const A = 9301
 	const B = 49_297
 	const C = 233_280

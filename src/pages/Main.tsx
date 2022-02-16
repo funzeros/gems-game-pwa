@@ -8,12 +8,12 @@ export default function Main(): ReactElement {
 	return (
 		<>
 			<Head title='GemsGame-场景' />
-			<div className='flex h-full w-full  flex-col  bg-gray-100'>
-				<div className='flex-1 overflow-hidden bg-green-500' />
-				<div className='flex-1 overflow-hidden shadow-inner'>
+			<main className='flex h-full w-full  flex-col  bg-gray-100'>
+				<section className='flex-1 overflow-hidden bg-green-500' />
+				<section className='flex-1 overflow-hidden shadow-inner'>
 					<MessageList />
-				</div>
-			</div>
+				</section>
+			</main>
 		</>
 	)
 }
