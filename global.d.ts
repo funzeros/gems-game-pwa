@@ -15,7 +15,3 @@ declare const log: (first: string, ...rest: unknown[]) => void
 interface Window {
 	log: log
 }
-
-interface Number {
-	equal: (number_: number) => boolean
-}

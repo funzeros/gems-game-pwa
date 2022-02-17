@@ -1,6 +1,3 @@
-function numberEqual(this: number, number_: number) {
-	return number_ === this
-}
 export const registerUtil = () => {
 	window.log = (first: string, ...rest: unknown[]) => {
 		// eslint-disable-next-line no-console
@@ -11,6 +8,4 @@ export const registerUtil = () => {
 			...rest
 		)
 	}
-
-	Reflect.set(Number.prototype, 'equal', numberEqual)
 }
