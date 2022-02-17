@@ -1,11 +1,19 @@
 import { Basic } from './base'
 
+const enum MessageItemEnum {
+	basic
+}
+
 export class MessageItem extends Basic {
 	public attach: Record<string, string>[] = []
 
 	public sounder: string
 
 	public content: string
+
+	public level = 0
+
+	public type: keyof typeof MessageItemEnum = 'basic'
 
 	protected constructor(
 		sounder: string,
@@ -30,5 +38,9 @@ export class MessageItem extends Basic {
 	public static sys(content: string, attach?: Record<string, string>[]) {
 		const { id, ...item } = new MessageItem('系统', content, attach)
 		return item
+	}
+
+	public static getField() {
+		return this.genField(new MessageItem('', '', []))
 	}
 }
