@@ -12,7 +12,7 @@ export * from './building'
 export * from './message'
 export * from './role'
 
-const DATEBASE_VERSION = 6
+const DATEBASE_VERSION = 8
 
 const tables = {
 	messageList: MessageItem.getField(),
@@ -20,10 +20,11 @@ const tables = {
 	biology: Biology.getField(),
 	building: Building.getField()
 }
+
 export const database = new Dexie('GemsGame') as Dexie &
 	Record<keyof typeof tables, Table>
 
-function useStore() {
+const initDatabse = async () => {
 	database
 		.version(DATEBASE_VERSION)
 		.stores(tables)
@@ -34,7 +35,19 @@ function useStore() {
 				)
 			}, Numbers.thousand)
 		})
-	void database.messageList.add(MessageItem.sys('欢迎回来，勇士'))
+	const playerCount = await database.biology
+		.where({ isPlayer: Numbers.true })
+		.count()
+	if (!playerCount) {
+		await database.biology.add(Biology.createPlayer())
+	}
+	const player = (await database.biology
+		.where({ isPlayer: Numbers.true })
+		.first()) as Biology
+	void database.messageList.add(MessageItem.sys(`欢迎回来，${player.name}`))
+}
+async function useStore() {
+	await initDatabse()
 	return {}
 }
 

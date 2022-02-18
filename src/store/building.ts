@@ -3,9 +3,9 @@ import { Basic } from './base'
 export class Building extends Basic {
 	public blockId = 0
 
-	public hasExplored = false
+	public hasExplored = 0
 
-	public hasCompeleted = false
+	public hasCompeleted = 0
 
 	public favorability = 0
 }

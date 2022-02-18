@@ -8,19 +8,20 @@ import { toLocaleString } from 'utils'
 import LoadingOrError from './LoadingOrError'
 
 export default function MessageList(): ReactElement {
-	const [size, setSize] = useState(Numbers.twenty)
+	const [size, setSize] = useState(Numbers.zero)
 	const [total, setTotal] = useState(Numbers.zero)
 	const [autoScroll, setAutoScroll] = useState(true)
 	async function initTotal() {
 		const totalValue = await database.messageList.count()
 		setTotal(totalValue)
-		setSize(Numbers.twenty)
+		setSize(Numbers.halfHundred)
 	}
 	const messageList = useLiveQuery<MessageItem[]>(async () => {
 		if (total) {
 			return database.messageList
 				.orderBy('createTime')
-				.offset(total - size)
+				.reverse()
+				.limit(Numbers.hundred)
 				.toArray()
 		}
 		await initTotal()
@@ -28,10 +29,11 @@ export default function MessageList(): ReactElement {
 	}, [size, total])
 	const list = useRef<HTMLUListElement>(null)
 	const messagesEndReference = useRef<HTMLDivElement>(null)
-	function scrollToBottom() {
+	function messageChangeScroll() {
 		// 自动滚动
-		if (autoScroll)
+		if (autoScroll) {
 			messagesEndReference.current?.scrollIntoView({ behavior: 'smooth' })
+		}
 	}
 	const onScroll: UIEventHandler = event_ => {
 		event_.preventDefault()
@@ -43,36 +45,32 @@ export default function MessageList(): ReactElement {
 			if (autoScroll) setAutoScroll(false)
 		} else {
 			if (!autoScroll) setAutoScroll(true)
-			void initTotal()
 			return
 		}
 		// 如果滚动条在最顶部则加载更多数据
 		if (Numbers.zero === scrollTop) {
-			setSize(preValue => preValue + Numbers.ten)
-			if (messageList) {
-				const [first] = messageList
-				const oItem = document.querySelector(`[data-id='${first.id}']`)
-				oItem?.scrollIntoView()
-			}
+			setSize(preValue => preValue + Numbers.twenty)
 		}
 	}
 
-	useEffect(scrollToBottom, [autoScroll, messageList])
+	useEffect(messageChangeScroll, [autoScroll, messageList])
 
 	if (!messageList) return <LoadingOrError />
 	return (
 		<ul
-			className=' h-full overflow-y-auto overflow-x-hidden p-1 text-xs'
+			className=' h-full overflow-x-hidden overflow-y-scroll text-base'
 			onScroll={onScroll}
 			ref={list}
 		>
-			{messageList.map(({ id, sounder, createTime, content }) => (
-				<li key={id} data-id={id}>
-					<span>[{toLocaleString(createTime)}]</span>
-					<span>{sounder}：</span>
-					<span>{content}</span>
-				</li>
-			))}
+			{messageList
+				.map(({ id, sounder, createTime, content }) => (
+					<li key={id}>
+						<span>[{toLocaleString(createTime)}]</span>
+						<span>{sounder}：</span>
+						<span>{content}</span>
+					</li>
+				))
+				.reverse()}
 			<div ref={messagesEndReference} />
 		</ul>
 	)

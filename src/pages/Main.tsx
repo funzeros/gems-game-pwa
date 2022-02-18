@@ -9,8 +9,8 @@ export default function Main(): ReactElement {
 		<>
 			<Head title='GemsGame-场景' />
 			<main className='flex h-full w-full  flex-col  bg-gray-100'>
-				<section className='flex-1 overflow-hidden bg-green-500' />
-				<section className='flex-1 overflow-hidden shadow-inner'>
+				<section className='flex-1 overflow-hidden bg-green-500  p-1' />
+				<section className='flex-1 overflow-hidden p-1  shadow-inner '>
 					<MessageList />
 				</section>
 			</main>

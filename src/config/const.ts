@@ -1,9 +1,15 @@
 export const enum Numbers {
+	true = 1,
+	false = 0,
+	two = 2,
+	five = 5,
 	zero = 0,
 	one = 1,
 	ten = 10,
 	twenty = 20,
+	halfHundred = 50,
 	hundred = 100,
+	threeHundred = 300,
 	thousand = 1000
 }
 
