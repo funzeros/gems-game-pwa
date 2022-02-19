@@ -44,12 +44,12 @@ export default function MainLayout(): ReactElement {
 	}
 	return (
 		<section className='fixed flex h-screen  w-screen flex-col  overflow-hidden bg-gray-100'>
-			<div className='flex-1 overflow-hidden'>
+			<section className='flex-1 overflow-hidden'>
 				<Switch>
 					{MyRoutes}
 					<Redirect exact to={RoutePath.main} />
 				</Switch>
-			</div>
+			</section>
 			<Tabbar
 				value={pathname}
 				fixed={false}

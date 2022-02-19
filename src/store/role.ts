@@ -23,17 +23,24 @@ export class Biology extends Basic {
 
 	protected constructor(opt: Partial<Biology>) {
 		super()
-		const { name, isPlayer } = { name: '', isPlayer: 0, ...opt }
+		const { name, isPlayer, blockId } = {
+			name: '',
+			isPlayer: 0,
+			blockId: 0,
+			...opt
+		}
 		this.name = name
 		this.isPlayer = isPlayer
+		this.blockId = blockId
 	}
 
-	public static createPlayer() {
+	public static createPlayer(blockId: number) {
 		const { id, ...item } = new Biology({
 			name: engine.getRandomCharacters(
 				engine.randomInteger(Numbers.five, Numbers.two)
 			),
-			isPlayer: Numbers.true
+			isPlayer: Numbers.true,
+			blockId
 		})
 		return item
 	}

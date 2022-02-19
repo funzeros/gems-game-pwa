@@ -3,30 +3,23 @@ import { useLiveQuery } from 'dexie-react-hooks'
 import type { ReactElement, UIEventHandler } from 'react'
 import { useEffect, useRef, useState } from 'react'
 import type { MessageItem } from 'store'
-import { database } from 'store'
+import { database } from 'store/databse'
 import { toLocaleString } from 'utils'
 import LoadingOrError from './LoadingOrError'
 
 export default function MessageList(): ReactElement {
 	const [size, setSize] = useState(Numbers.zero)
-	const [total, setTotal] = useState(Numbers.zero)
 	const [autoScroll, setAutoScroll] = useState(true)
-	async function initTotal() {
-		const totalValue = await database.messageList.count()
-		setTotal(totalValue)
-		setSize(Numbers.halfHundred)
-	}
-	const messageList = useLiveQuery<MessageItem[]>(async () => {
-		if (total) {
-			return database.messageList
+
+	const messageList = useLiveQuery<MessageItem[]>(
+		async () =>
+			database.messageList
 				.orderBy('createTime')
 				.reverse()
-				.limit(Numbers.hundred)
-				.toArray()
-		}
-		await initTotal()
-		return []
-	}, [size, total])
+				.limit(Numbers.halfHundred)
+				.toArray(),
+		[size]
+	)
 	const list = useRef<HTMLUListElement>(null)
 	const messagesEndReference = useRef<HTMLDivElement>(null)
 	function messageChangeScroll() {
@@ -55,23 +48,24 @@ export default function MessageList(): ReactElement {
 
 	useEffect(messageChangeScroll, [autoScroll, messageList])
 
-	if (!messageList) return <LoadingOrError />
-	return (
-		<ul
-			className=' h-full overflow-x-hidden overflow-y-scroll text-base'
-			onScroll={onScroll}
-			ref={list}
-		>
-			{messageList
-				.map(({ id, sounder, createTime, content }) => (
-					<li key={id}>
-						<span>[{toLocaleString(createTime)}]</span>
-						<span>{sounder}：</span>
-						<span>{content}</span>
-					</li>
-				))
-				.reverse()}
-			<div ref={messagesEndReference} />
-		</ul>
-	)
+	if (messageList)
+		return (
+			<ul
+				className=' h-full overflow-x-hidden overflow-y-scroll text-base'
+				onScroll={onScroll}
+				ref={list}
+			>
+				{messageList
+					.map(({ id, sounder, createTime, content }) => (
+						<li key={id}>
+							<span>[{toLocaleString(createTime)}]</span>
+							<span>{sounder}：</span>
+							<span>{content}</span>
+						</li>
+					))
+					.reverse()}
+				<div ref={messagesEndReference} />
+			</ul>
+		)
+	return <LoadingOrError />
 }

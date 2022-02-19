@@ -5,12 +5,14 @@ import type { ReactElement } from 'react'
 import { lazy, Suspense } from 'react'
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 import 'react-vant/lib/index.css'
+import { useStoreModel } from 'store'
 
 const MainLayout = lazy(async () => import('layout/MainLayout'))
 
 const MyRoutes = genRoute(defineRoutes())
 
 export default function App(): ReactElement {
+	useStoreModel()
 	return (
 		<BrowserRouter>
 			<Suspense fallback={<LoadingOrError />}>
