@@ -25,3 +25,12 @@
 		src: url('/fonts/Inter-Bold.woff2') format('woff2');
 	}
 }
+
+*::-webkit-scrollbar {
+	width: 0.5rem;
+}
+
+*::-webkit-scrollbar-thumb {
+	border-radius: 5px;
+	background-color: #ccc;
+}

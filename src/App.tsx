@@ -1,15 +1,10 @@
 import LoadingOrError from 'components/LoadingOrError'
-import { genRoute } from 'components/MyRoutes'
-import { defineRoutes, RoutePath } from 'pages/router'
 import type { ReactElement } from 'react'
 import { lazy, Suspense } from 'react'
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
-import 'react-vant/lib/index.css'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { useStoreModel } from 'store'
 
 const MainLayout = lazy(async () => import('layout/MainLayout'))
-
-const MyRoutes = genRoute(defineRoutes())
 
 export default function App(): ReactElement {
 	useStoreModel()
@@ -17,9 +12,7 @@ export default function App(): ReactElement {
 		<BrowserRouter>
 			<Suspense fallback={<LoadingOrError />}>
 				<Switch>
-					<Redirect exact from='/' to={RoutePath.tabbar} />
-					<Route path={RoutePath.tabbar} component={MainLayout} />
-					{MyRoutes}
+					<Route path='/' component={MainLayout} />
 					<LoadingOrError error={new Error('404')} />
 				</Switch>
 			</Suspense>

@@ -1,5 +1,4 @@
 import { createModel } from 'hox'
-import { initPlayer } from './api'
 import { initDatabse } from './databse'
 
 export * from './block'
@@ -9,7 +8,6 @@ export * from './role'
 
 function useStore() {
 	initDatabse()
-	void initPlayer()
 	return {}
 }
 

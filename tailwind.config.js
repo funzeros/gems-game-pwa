@@ -6,6 +6,14 @@ module.exports = {
 	theme: {
 		fontFamily: {
 			sans: ['Inter', ...defaultConfig.theme.fontFamily.sans]
+		},
+		screens: {
+			over70vh: { min: '70vh' }
+		},
+		extend: {
+			width: {
+				'half-screen': '50vh'
+			}
 		}
 	},
 	experimental: { optimizeUniversalDefaults: true },

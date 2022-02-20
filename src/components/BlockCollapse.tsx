@@ -15,6 +15,7 @@ export default function BlockCollapse(): ReactElement {
 		async () => database.building.get({ blockId: block?.id ?? 0 }),
 		[block?.id]
 	)
+
 	if (player && block)
 		return (
 			<div className=' relative h-full'>
@@ -24,5 +25,5 @@ export default function BlockCollapse(): ReactElement {
 				{buildings ? <div>{buildings.id}</div> : <div>1</div>}
 			</div>
 		)
-	return <LoadingOrError />
+	return <LoadingOrError inner />
 }

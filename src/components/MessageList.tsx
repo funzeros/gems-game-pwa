@@ -67,5 +67,5 @@ export default function MessageList(): ReactElement {
 				<div ref={messagesEndReference} />
 			</ul>
 		)
-	return <LoadingOrError />
+	return <LoadingOrError inner />
 }

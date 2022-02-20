@@ -34,11 +34,20 @@ export class Biology extends Basic {
 		this.blockId = blockId
 	}
 
-	public static createPlayer(blockId: number) {
+	public static createRole(blockId: number) {
 		const { id, ...item } = new Biology({
 			name: engine.getRandomCharacters(
 				engine.randomInteger(Numbers.five, Numbers.two)
 			),
+			isPlayer: Numbers.true,
+			blockId
+		})
+		return item
+	}
+
+	public static createPlayer(name: string, blockId: number) {
+		const { id, ...item } = new Biology({
+			name,
 			isPlayer: Numbers.true,
 			blockId
 		})

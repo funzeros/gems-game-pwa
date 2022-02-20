@@ -16,8 +16,8 @@ export class MessageItem extends Basic {
 	public type: keyof typeof MessageItemEnum = 'basic'
 
 	protected constructor(
-		sounder: string,
-		content: string,
+		sounder = '',
+		content = '',
 		attach?: Record<string, string>[]
 	) {
 		super()
@@ -38,9 +38,5 @@ export class MessageItem extends Basic {
 	public static sys(content: string, attach?: Record<string, string>[]) {
 		const { id, ...item } = new MessageItem('系统', content, attach)
 		return item
-	}
-
-	public static getField() {
-		return this.genField(new MessageItem('', '', []))
 	}
 }

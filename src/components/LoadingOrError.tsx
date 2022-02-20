@@ -2,10 +2,18 @@ import type { ReactElement } from 'react'
 
 interface Properties {
 	error?: Error
+	inner?: boolean
 }
-export default function LoadingOrError({ error }: Properties): ReactElement {
+export default function LoadingOrError({
+	error,
+	inner
+}: Properties): ReactElement {
 	return (
-		<div className='flex min-h-screen items-center justify-center'>
+		<div
+			className={`flex ${
+				inner ? 'min-h-full' : 'min-h-screen'
+			} items-center justify-center`}
+		>
 			<h1 className='text-xl' data-testid='LoadingOrError'>
 				{error ? error.message : 'Loading...'}
 			</h1>
@@ -13,5 +21,6 @@ export default function LoadingOrError({ error }: Properties): ReactElement {
 	)
 }
 LoadingOrError.defaultProps = {
-	error: undefined
+	error: undefined,
+	inner: false
 }

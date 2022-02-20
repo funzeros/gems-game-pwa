@@ -31,5 +31,9 @@ export class GenerEngine {
 		})
 		return string
 	}
+
+	public getRandomByArray<T>(array: T[]) {
+		return array[this.randomInteger(array.length)]
+	}
 }
 export const engine = new GenerEngine()
