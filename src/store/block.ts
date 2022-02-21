@@ -1,9 +1,12 @@
+import { Numbers } from 'config/const'
 import { Basic } from './base'
 
 export class Block extends Basic {
 	public x = 0
 
 	public y = 0
+
+	public exploreValue = Numbers.ten
 
 	public constructor(opt: Partial<Block>) {
 		super()

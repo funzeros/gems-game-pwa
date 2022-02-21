@@ -1,4 +1,5 @@
-import { areaTypeKeys } from 'config/const'
+import type { AreaTypekeys } from 'config/const'
+import { areaTypeKeys, Numbers } from 'config/const'
 import { Basic } from './base'
 import { engine } from './engine'
 
@@ -11,13 +12,18 @@ export class Building extends Basic {
 
 	public favorability = 0
 
-	public type: string
+	public type: AreaTypekeys
+
+	public name: string
 
 	public constructor(opt: Partial<Building>) {
 		super()
 		const { blockId } = { blockId: 0, ...opt }
 		this.blockId = blockId
 		this.type = engine.getRandomByArray(areaTypeKeys)
+		this.name = engine.getRandomCharacters(
+			engine.randomInteger(Numbers.five, Numbers.two)
+		)
 	}
 
 	public static create(opt: Partial<Building>) {

@@ -32,8 +32,12 @@ export class GenerEngine {
 		return string
 	}
 
-	public getRandomByArray<T>(array: T[]) {
+	public getRandomByArray<T>(array: T[]): T {
 		return array[this.randomInteger(array.length)]
+	}
+
+	public getRandomBool() {
+		return this.#random() > Numbers.half
 	}
 }
 export const engine = new GenerEngine()

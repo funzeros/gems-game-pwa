@@ -9,10 +9,22 @@ import { MessageItem } from './message'
 import { Biology } from './role'
 
 export async function genBuildingByBlockId(blockId: number) {
-	const buildings = times(engine.randomInteger(Numbers.ten, Numbers.two), () =>
+	const buildings = times(engine.randomInteger(Numbers.ten, Numbers.five), () =>
 		Building.create({ blockId })
 	)
 	await database.building.bulkAdd(buildings)
+}
+export async function exploreBuilding(id: number) {
+	const result = await database.building.update(id, {
+		hasExplored: Numbers.true
+	})
+	return result
+}
+export async function changeExporeValue(id: number, exploreValue: number) {
+	const result = await database.block.update(id, {
+		exploreValue
+	})
+	return result
 }
 export async function getBlockIdByXY(x: number, y: number) {
 	const block = (await database.block.get(['x', 'y'])) as Block | undefined

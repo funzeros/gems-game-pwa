@@ -1,10 +1,13 @@
 export const enum Numbers {
 	true = 1,
 	false = 0,
-	two = 2,
-	five = 5,
 	zero = 0,
+	half = 0.5,
 	one = 1,
+	two = 2,
+	three = 3,
+	four = 4,
+	five = 5,
 	ten = 10,
 	twenty = 20,
 	halfHundred = 50,
@@ -44,7 +47,8 @@ export const areaType = Object.freeze({
 	city: { label: '城邦', tag: [Tags.人, Tags.金, Tags.社] },
 	town: { label: '城镇', tag: [Tags.人, Tags.金, Tags.社] }
 })
-export const areaTypeKeys = Object.keys(areaType) as (keyof typeof areaType)[]
+export type AreaTypekeys = keyof typeof areaType
+export const areaTypeKeys = Object.keys(areaType) as AreaTypekeys[]
 
 export enum Species {
 	人属,

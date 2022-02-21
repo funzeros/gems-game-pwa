@@ -70,6 +70,7 @@
 			"error",
 			{ "ignoreArrowShorthand": true }
 		],
+		"@typescript-eslint/no-type-alias": "off",
 		"@typescript-eslint/non-nullable-type-assertion-style": "off",
 		"@typescript-eslint/strict-boolean-expressions": "off",
 		"@typescript-eslint/no-implicit-any-catch": "off",
@@ -155,7 +156,7 @@
 				}
 			}
 		],
-		"unicorn/no-nested-ternary": ["error"]
+		"unicorn/no-nested-ternary": "off"
 	},
 	"settings": {
 		"react": {

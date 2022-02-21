@@ -37,3 +37,23 @@ export const toLocaleString = (time: Date | number | string): string => {
 	if (isDate(time)) return time.toLocaleString('zh-CN', { hour12: false })
 	return new Date(time).toLocaleString('zh-CN', { hour12: false })
 }
+
+export function useLoading<T>(function_: () => Promise<T>) {
+	const [loading, setLoading] = useState(false)
+	async function handler() {
+		setLoading(true)
+		await function_().catch(error => {
+			log(function_.name || 'useLoading', error)
+		})
+		setLoading(false)
+	}
+	return [loading, handler] as [typeof loading, typeof handler]
+}
+
+export async function wait(waitTime: number) {
+	return new Promise(resolve => {
+		setTimeout(() => {
+			resolve(true)
+		}, waitTime)
+	})
+}
